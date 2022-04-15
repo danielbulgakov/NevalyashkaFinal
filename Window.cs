@@ -14,7 +14,7 @@ namespace Nevalyashka
     // OpenGL's initial hurdle is quite large, but once you get past that, things will start making more sense.
     public class Window : GameWindow
     {
-        Vector3 LightPos = new Vector3(0.0f, 2.7f, 0.0f);
+        Vector3 LightPos = new Vector3(0.0f, 2.6f, 0.0f);
 
         Shader Shader;
 
@@ -25,7 +25,7 @@ namespace Nevalyashka
 
         double Time;
         int Side = 1;
-        const double Degrees = 50;
+        const double Degrees = 40;
         
 
 
@@ -58,8 +58,8 @@ namespace Nevalyashka
             GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
             GL.Enable(EnableCap.DepthTest);
 
-            Sphere Butt = new Sphere(0.3f, 0.0f, 0.6f, 0f);
-            Sphere Head = new Sphere(0.5f, 0.0f, 0.0f, 0f);
+            Sphere Butt = new Sphere(0.2f, 0.0f, 0.5f, 0f);
+            Sphere Head = new Sphere(0.4f, 0.0f, 0.0f, 0f);
 
             Shader = new Shader("../../../Shaders/shader.vert", "../../../Shaders/lighting.frag");
             DefineShader(Shader);
@@ -73,12 +73,8 @@ namespace Nevalyashka
             var ButtVert = Butt.GetAll(); var ButtInd = Butt.GetIndices();
             var HeadVert = Head.GetAll(); var HeadInd = Head.GetIndices();
            
-
             ObjectRenderList.Add(new ObjectRender(ButtVert, ButtInd, Shader, DiffuseTail, SpecularTail));
             ObjectRenderList.Add(new ObjectRender(HeadVert, HeadInd, Shader, DiffuseHead , SpecularHead));
-
-
-            
         }
 
         protected override void OnRenderFrame(FrameEventArgs e)
@@ -86,14 +82,14 @@ namespace Nevalyashka
             base.OnRenderFrame(e);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-            Time += 40.0 * e.Time * Side * Math.Cos(Time / 40);
+            Time += 35.0 * e.Time * Side * Math.Cos(Time / 30);
 
             if (Math.Abs(Time) > Degrees) Side *= -1;
 
             var RotationMatrixZ = Matrix4.CreateRotationX((float)MathHelper.DegreesToRadians(Time));
             var RotationMatrixY = Matrix4.CreateRotationY((float)MathHelper.DegreesToRadians(90));
-
             var TranslationMatrix = Matrix4.CreateTranslation(0, 0, (float)(Time / 80));
+
             var model = Matrix4.Identity * RotationMatrixZ * TranslationMatrix * RotationMatrixY;
 
             foreach (var Obj in ObjectRenderList)
@@ -104,9 +100,6 @@ namespace Nevalyashka
                 Obj.ShaderAttribute();
                 Obj.Render();
             }
-
-
-
 
             SwapBuffers();
         }

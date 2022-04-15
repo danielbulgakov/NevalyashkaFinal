@@ -39,11 +39,7 @@ namespace Nevalyashka.Render
                Vertices,                           // data to initialize with
                BufferStorageFlags.MapWriteBit);    // at this point we will only write to the buffer
 
-            //GL.VertexArrayAttribBinding(VertexArrayObject, 0, 0);
             GL.EnableVertexArrayAttrib(VertexArrayObject, 0);
-
-
-
 
             GL.VertexArrayVertexBuffer(VertexArrayObject, 0, VertexBufferObject, IntPtr.Zero, 8 * sizeof(float));
 
@@ -86,7 +82,7 @@ namespace Nevalyashka.Render
         {
             Diffuse.Use(TextureUnit.Texture0);
             Specular.Use(TextureUnit.Texture1);
-            Shader.Use();
+            
         }
          
         public void UpdateShaderModel(Matrix4 model)
