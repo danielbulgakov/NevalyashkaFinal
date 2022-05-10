@@ -22,7 +22,7 @@ namespace Nevalyashka.Render
 
 
 
-        public ObjectRender(float[] Vertices, uint[] Indices, Shader shader, Texture dff, Texture spcl)
+        public ObjectRender(float[] Vertices, int[] Indices, Shader shader, Texture dff, Texture spcl)
         {
             IndicesLenght = Indices.Length;
             this.Shader = shader;

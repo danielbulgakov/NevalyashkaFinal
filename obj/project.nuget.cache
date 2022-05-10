@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "EsRYFLeDQ6p5mUpRX5PKCCr9F7HbO4Fu0acKG5kx262uOoKhEKeW6VPyKq1JRrjW0pk1+U0MWao68YqkFTrOQA==",
+  "dgSpecHash": "X6Xxdzg6oeIX+x1FcvyFB40XhMnJY3I34i3sl0xq2qK22haM6XqDWEKhwlbRxP0e6xu4wTQ7PI3XprL/iFHoTw==",
   "success": true,
-  "projectFilePath": "D:\\Study\\ComputerGraphic\\Nevalyashka\\Nevalyashka.csproj",
+  "projectFilePath": "D:\\Study\\Vova\\NevalyashkaFinal\\Nevalyashka.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\User\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\opentk\\4.7.1\\opentk.4.7.1.nupkg.sha512",

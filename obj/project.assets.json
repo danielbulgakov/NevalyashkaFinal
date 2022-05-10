@@ -474,11 +474,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Study\\ComputerGraphic\\Nevalyashka\\Nevalyashka.csproj",
+      "projectUniqueName": "D:\\Study\\Vova\\NevalyashkaFinal\\Nevalyashka.csproj",
       "projectName": "Nevalyashka",
-      "projectPath": "D:\\Study\\ComputerGraphic\\Nevalyashka\\Nevalyashka.csproj",
+      "projectPath": "D:\\Study\\Vova\\NevalyashkaFinal\\Nevalyashka.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "D:\\Study\\ComputerGraphic\\Nevalyashka\\obj\\",
+      "outputPath": "D:\\Study\\Vova\\NevalyashkaFinal\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -7,6 +7,7 @@ using OpenTK.Mathematics;
 using Nevalyashka.Object;
 using Nevalyashka.Common;
 using Nevalyashka.Render;
+using Lab2Pyramid;
 
 namespace Nevalyashka
 {
@@ -58,23 +59,27 @@ namespace Nevalyashka
             GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
             GL.Enable(EnableCap.DepthTest);
 
-            Sphere Butt = new Sphere(0.2f, 0.0f, 0.5f, 0f);
-            Sphere Head = new Sphere(0.4f, 0.0f, 0.0f, 0f);
+            Cylinder stick = new Cylinder(0f, 0.5f, 0f, 0.5f, 0.2f);
+            Cylinder head = new Cylinder(0f, 1f, 0f, 0.2f, 0.7f);
+            //Sphere Butt = new Sphere(0.2f, 0.0f, 0.5f, 0f);
+            //Sphere Head = new Sphere(0.4f, 0.0f, 0.0f, 0f);
 
             Shader = new Shader("../../../Shaders/shader.vert", "../../../Shaders/lighting.frag");
-            DefineShader(Shader);
+            //DefineShader(Shader);
 
             DiffuseHead = Texture.LoadFromFile("../../../Resources/red.jpg");
             SpecularHead = Texture.LoadFromFile("../../../Resources/red_specular.jpg");
+            ObjectRenderList.Add(new ObjectRender(stick.GetAllTogether(), stick.GetIndices(), Shader, DiffuseHead, SpecularHead));
+            ObjectRenderList.Add(new ObjectRender(head.GetAllTogether(), head.GetIndices(), Shader, DiffuseHead, SpecularHead));
 
-            DiffuseTail = Texture.LoadFromFile("../../../Resources/head.jpg");
-            SpecularTail = Texture.LoadFromFile("../../../Resources/head_specular.jpg");
+            //DiffuseTail = Texture.LoadFromFile("../../../Resources/head.jpg");
+            //SpecularTail = Texture.LoadFromFile("../../../Resources/head_specular.jpg");
 
-            var ButtVert = Butt.GetAll(); var ButtInd = Butt.GetIndices();
-            var HeadVert = Head.GetAll(); var HeadInd = Head.GetIndices();
-           
-            ObjectRenderList.Add(new ObjectRender(ButtVert, ButtInd, Shader, DiffuseTail, SpecularTail));
-            ObjectRenderList.Add(new ObjectRender(HeadVert, HeadInd, Shader, DiffuseHead , SpecularHead));
+            //var ButtVert = Butt.GetAll(); var ButtInd = Butt.GetIndices();
+            //var HeadVert = Head.GetAll(); var HeadInd = Head.GetIndices();
+
+            //ObjectRenderList.Add(new ObjectRender(ButtVert, ButtInd, Shader, DiffuseTail, SpecularTail));
+            //ObjectRenderList.Add(new ObjectRender(HeadVert, HeadInd, Shader, DiffuseHead , SpecularHead));
         }
 
         protected override void OnRenderFrame(FrameEventArgs e)
@@ -88,9 +93,9 @@ namespace Nevalyashka
 
             var RotationMatrixZ = Matrix4.CreateRotationX((float)MathHelper.DegreesToRadians(Time));
             var RotationMatrixY = Matrix4.CreateRotationY((float)MathHelper.DegreesToRadians(90));
-            var TranslationMatrix = Matrix4.CreateTranslation(0, 0, (float)(Time / 80));
+            var TranslationMatrix = Matrix4.CreateTranslation(0, -0.5f, 0);
 
-            var model = Matrix4.Identity * RotationMatrixZ * TranslationMatrix * RotationMatrixY;
+            var model = Matrix4.Identity * RotationMatrixZ * RotationMatrixY * TranslationMatrix;
 
             foreach (var Obj in ObjectRenderList)
             {
