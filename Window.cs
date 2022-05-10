@@ -59,8 +59,8 @@ namespace Nevalyashka
             GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
             GL.Enable(EnableCap.DepthTest);
 
-            Cylinder stick = new Cylinder(0f, 0.5f, 0f, 0.5f, 0.2f);
-            Cylinder head = new Cylinder(0f, 1f, 0f, 0.2f, 0.7f);
+            Cylinder stick = new Cylinder(0f, 1.0f, 0f, 0.15f, 1f);
+            Cylinder head = new Cylinder(0f, 0.5f, 0f, 0.2f, 0.8f);
             //Sphere Butt = new Sphere(0.2f, 0.0f, 0.5f, 0f);
             //Sphere Head = new Sphere(0.4f, 0.0f, 0.0f, 0f);
 
@@ -77,7 +77,9 @@ namespace Nevalyashka
 
             //var ButtVert = Butt.GetAll(); var ButtInd = Butt.GetIndices();
             //var HeadVert = Head.GetAll(); var HeadInd = Head.GetIndices();
-
+            var model = Matrix4.Identity;
+            var RotationMatrixY = Matrix4.CreateRotationX((float)MathHelper.DegreesToRadians(90));
+            ObjectRenderList[0].UpdateShaderModel(model * RotationMatrixY);
             //ObjectRenderList.Add(new ObjectRender(ButtVert, ButtInd, Shader, DiffuseTail, SpecularTail));
             //ObjectRenderList.Add(new ObjectRender(HeadVert, HeadInd, Shader, DiffuseHead , SpecularHead));
         }
@@ -93,12 +95,28 @@ namespace Nevalyashka
 
             var RotationMatrixZ = Matrix4.CreateRotationX((float)MathHelper.DegreesToRadians(Time));
             var RotationMatrixY = Matrix4.CreateRotationY((float)MathHelper.DegreesToRadians(90));
-            var TranslationMatrix = Matrix4.CreateTranslation(0, -0.5f, 0);
+            //var RotationMatrixX = Matrix4.CreateRotationY((float)MathHelper.DegreesToRadians(Time));
+            var TranslationMatrix = Matrix4.CreateTranslation(0, -0.3f, 0);
+
+
+
 
             var model = Matrix4.Identity * RotationMatrixZ * RotationMatrixY * TranslationMatrix;
+            var model1 = Matrix4.Identity * Matrix4.CreateRotationX((float)MathHelper.DegreesToRadians(90)) * 
+                Matrix4.CreateRotationZ((float)MathHelper.DegreesToRadians(-Time))  *TranslationMatrix;
 
-            foreach (var Obj in ObjectRenderList)
+            var Obj = ObjectRenderList[0];
             {
+
+                Obj.Bind();
+                Obj.ApplyTexture();
+                Obj.UpdateShaderModel(model1);
+                Obj.ShaderAttribute();
+                Obj.Render();
+            }
+            Obj = ObjectRenderList[1];
+            {
+
                 Obj.Bind();
                 Obj.ApplyTexture();
                 Obj.UpdateShaderModel(model);
